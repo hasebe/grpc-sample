@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package wait;
+
+service Wait {
+  // A simple RPC.
+  rpc GetTime(Empty) returns (Message) {}
+
+  // A server-to-client streaming RPC.
+  rpc WaitByServer(ConnectionDetail) returns (stream Message) {}
+
+  // A client-to-server streaming RPC.
+  rpc WaitByClient(stream Message) returns (Message) {}
+}
+
+message Message {
+  string time = 1;
+}
+
+message Empty {}
+
+message ConnectionDetail {
+  int32 interval = 1;
+  int32 count = 2;
+}
